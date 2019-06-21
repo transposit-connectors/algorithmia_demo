@@ -1,21 +1,37 @@
 {
   "v2": {
     "transposit": {
+      "dependencies": [{
+        "name": "jpeck/algorithmiaconnector:latest",
+        "alias": "algorithmiaconnector"
+      }, {
+        "name": "transposit/github:v3.*.*",
+        "alias": "github"
+      }],
       "operations": [{
-        "id": "hello_world",
-        "description": "Returns \"Hello, world\" in different languages",
-        "function": {
-          "js": "hello_world.js"
-        },
-        "access": {
-          "requireUser": true
+        "id": "SentimentAnalysis",
+        "description": "https://algorithmia.com/algorithms/nlp/SentimentAnalysis",
+        "tql": {
+          "tql": "SELECT result FROM algorithmiaconnector.algorithm\n  WHERE algorithm='nlp/SentimentAnalysis'\n  AND $body='{\"document\": \"I really like Algorithmia!\"}'\n"
+        }
+      }, {
+        "id": "HelloWorld",
+        "description": "https://algorithmia.com/algorithms/demo/Hello",
+        "tql": {
+          "tql": "SELECT result FROM algorithmiaconnector.algorithm\n  WHERE $body='\"World\"' and algorithm='demo/Hello'"
+        }
+      }, {
+        "id": "SentimentAnalysis on GitHub Repo",
+        "description": "Check a GH repo for happy or angry commit messages",
+        "tql": {
+          "tql": "SELECT * \nFROM (SELECT C.commit.message, S.result[0].sentiment\n      FROM github.list_commits AS C\n        JOIN algorithmiaconnector.algorithm AS S \n         ON S.$body.document = C.commit.message\n      WHERE C.owner='seattlerb'\n      AND C.repo='heckle'\n      AND S.algorithm='nlp/SentimentAnalysis'\n      LIMIT 100)\nWHERE (sentiment > 0.2 OR sentiment < -0.2)\nORDER BY sentiment\n"
         }
       }],
       "javascriptAPIVersion": "3",
       "source": "src",
       "userSettingsDisplay": "GENERATED"
     },
-    "description": "Sample queries using the Algorithmia Connector. More info: https://algorithmia.com/developers/integrations/transposit",
+    "description": "Sample queries using the Algorithmia Connector: more info at https://algorithmia.com/developers/integrations/transposit",
     "displayName": "Algorithmia Demo"
   }
 }
