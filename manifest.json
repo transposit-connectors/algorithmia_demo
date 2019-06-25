@@ -2,9 +2,6 @@
   "v2": {
     "transposit": {
       "dependencies": [{
-        "name": "jpeck/algorithmiaconnector:latest",
-        "alias": "algorithmiaconnector"
-      }, {
         "name": "transposit/github:v3.*.*",
         "alias": "github"
       }, {
