@@ -15,19 +15,19 @@
         "id": "SentimentAnalysis",
         "description": "https://algorithmia.com/algorithms/nlp/SentimentAnalysis",
         "tql": {
-          "tql": "SELECT result FROM algorithmiaconnector.algorithm\n  WHERE algorithm='nlp/SentimentAnalysis'\n  AND $body='{\"document\": \"I really like Algorithmia!\"}'\n"
+          "tql": "-- An algorithm that determines positive or negative sentiment from text\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='nlp'\n  AND algorithm='SentimentAnalysis'\n  AND $body='{\"document\": \"I really like Algorithmia!\"}'\n"
         }
       }, {
         "id": "HelloWorld",
         "description": "https://algorithmia.com/algorithms/demo/Hello",
         "tql": {
-          "tql": "SELECT result FROM algorithmiaconnector.algorithm\n  WHERE $body='\"World\"' and algorithm='demo/Hello'"
+          "tql": "-- The sample Algorithmia algorithm\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='demo'\n  AND algorithm='Hello'\t\t\t\t\t\t\t-- If using a private algorithm, you must include the full version\n  AND $body='\"World\"'\t\t\t\t\t\t\t-- Note that \"World\" is surrounded by quotation marks just as it is on Algorithmia\n"
         }
       }, {
         "id": "SentimentAnalysis on GitHub Repo",
         "description": "Check a GH repo for happy or angry commit messages",
         "tql": {
-          "tql": "SELECT * \nFROM (SELECT C.commit.message, S.result[0].sentiment\n      FROM github.list_commits AS C\n        JOIN algorithmiaconnector.algorithm AS S \n         ON S.$body.document = C.commit.message\n      WHERE C.owner='seattlerb'\n      AND C.repo='heckle'\n      AND S.algorithm='nlp/SentimentAnalysis'\n      LIMIT 100)\nWHERE (sentiment > 0.2 OR sentiment < -0.2)\nORDER BY sentiment\n"
+          "tql": "-- A more complicated integration that uses GitHub commits as the bodies for Algorithmia\nSELECT * FROM \n(SELECT C.commit.message, S.result[0].sentiment\n\tFROM github.list_commits AS C\n\t\tJOIN algorithmia.call_algorithm AS S \n\t\tON S.$body.document = C.commit.message\n\tWHERE C.owner='seattlerb'\n\tAND C.repo='heckle'\n\tAND S.user='nlp'\n \tAND S.algorithm='SentimentAnalysis'\n    LIMIT 100)\nWHERE (sentiment > 0.2 OR sentiment < -0.2)\nORDER BY sentiment"
         }
       }],
       "javascriptAPIVersion": "3",
