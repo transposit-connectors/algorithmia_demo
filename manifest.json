@@ -31,7 +31,7 @@
       "source": "src",
       "userSettingsDisplay": "GENERATED"
     },
-    "description": "Sample queries using the Algorithmia Connector: more info at https://algorithmia.com/developers/integrations/transposit",
+    "description": "A few sample queries that use the Algorithmia connector for Transposit. Includes the default \"Hello World!\" algorithm, a basic algorithm that uses NLP to analyse a message's sentiment, and an operation that uses the NLP algorithm to track and organize a GitHub Repository's commits by sentiment. Learn more about them at https://algorithmia.com/developers/integrations/transposit",
     "displayName": "Algorithmia Demo"
   }
 }
