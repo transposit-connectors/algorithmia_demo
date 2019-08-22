@@ -28,7 +28,8 @@
         }
       }],
       "javascriptAPIVersion": "3",
-      "source": "src"
+      "source": "src",
+      "userSettingsDisplay": "GENERATED"
     },
     "description": "Sample queries using the Algorithmia connector. More info [on Algorithmia's site](https://algorithmia.com/developers/integrations/transposit).",
     "displayName": "Algorithmia Demo"
