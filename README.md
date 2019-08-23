@@ -7,4 +7,4 @@ A few sample queries that use the Algorithmia connector for Transposit.
 
 `SentimentAnalysis on GitHub Repo`: An operation that uses the previous NLP algorithm to analyze and sort a [GitHub Repository's](https://github.com/seattlerb/heckle) commits by sentiment value.
 
-Learn more at https://algorithmia.com/developers/integrations/transposit
+Learn more at [https://algorithmia.com/developers/integrations/transposit](https://algorithmia.com/developers/integrations/transposit)!
