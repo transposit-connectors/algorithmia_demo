@@ -31,7 +31,7 @@
       "source": "src",
       "userSettingsDisplay": "GENERATED"
     },
-    "description": "Sample queries using the Algorithmia connector.",
+    "description": "Sample queries using Algorithmia’s machine learning APIs.",
     "displayName": "Algorithmia Demo"
   }
 }
