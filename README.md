@@ -1,4 +1,5 @@
 # Algorithmia Demo
+
 A few sample queries that use the Algorithmia connector for Transposit.
 
 `HelloWorld`: The [starter Algorithmia algorithm](https://algorithmia.com/algorithms/demo/Hello) that comes with every new user.

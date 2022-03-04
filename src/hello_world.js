@@ -2,14 +2,14 @@
   return [
     {
       language: "english",
-      message: "Hello, world"
+      message: "Hello, world",
     },
     {
       language: "spanish",
-      message: "Hola, mundo"
-    }
+      message: "Hola, mundo",
+    },
   ];
-}
+};
 
 /*
  * For sample code and reference material, visit

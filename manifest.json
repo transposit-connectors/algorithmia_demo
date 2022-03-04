@@ -1,32 +1,39 @@
 {
   "v2": {
     "transposit": {
-      "dependencies": [{
-        "name": "transposit/github:v3.*.*",
-        "alias": "github"
-      }, {
-        "name": "transposit/algorithmia:v1.*.*",
-        "alias": "algorithmia"
-      }],
-      "operations": [{
-        "id": "SentimentAnalysis",
-        "description": "https://algorithmia.com/algorithms/nlp/SentimentAnalysis",
-        "tql": {
-          "tql": "-- An algorithm that determines positive or negative sentiment from text\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='nlp'\n  AND algorithm='SentimentAnalysis'\n  AND $body='{\"document\": \"I really like Algorithmia!\"}'\n"
+      "dependencies": [
+        {
+          "name": "transposit/github:v3.*.*",
+          "alias": "github"
+        },
+        {
+          "name": "transposit/algorithmia:v1.*.*",
+          "alias": "algorithmia"
         }
-      }, {
-        "id": "HelloWorld",
-        "description": "https://algorithmia.com/algorithms/demo/Hello",
-        "tql": {
-          "tql": "-- The sample Algorithmia algorithm\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='demo'\n  AND algorithm='Hello'\t\t\t\t\t\t\t-- If using a private algorithm, you must include the full version\n  AND $body='\"World\"'\t\t\t\t\t\t\t-- Note that \"World\" is surrounded by quotation marks just as it is on Algorithmia\n"
+      ],
+      "operations": [
+        {
+          "id": "SentimentAnalysis",
+          "description": "https://algorithmia.com/algorithms/nlp/SentimentAnalysis",
+          "tql": {
+            "tql": "-- An algorithm that determines positive or negative sentiment from text\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='nlp'\n  AND algorithm='SentimentAnalysis'\n  AND $body='{\"document\": \"I really like Algorithmia!\"}'\n"
+          }
+        },
+        {
+          "id": "HelloWorld",
+          "description": "https://algorithmia.com/algorithms/demo/Hello",
+          "tql": {
+            "tql": "-- The sample Algorithmia algorithm\nSELECT result FROM algorithmia.call_algorithm\n  WHERE user='demo'\n  AND algorithm='Hello'\t\t\t\t\t\t\t-- If using a private algorithm, you must include the full version\n  AND $body='\"World\"'\t\t\t\t\t\t\t-- Note that \"World\" is surrounded by quotation marks just as it is on Algorithmia\n"
+          }
+        },
+        {
+          "id": "SentimentAnalysis on GitHub Repo",
+          "description": "Check a GH repo for happy or angry commit messages",
+          "tql": {
+            "tql": "-- A more complicated integration that uses GitHub commits as the bodies for Algorithmia\nSELECT * FROM \n(SELECT C.commit.message, S.result[0].sentiment\n\tFROM github.list_commits AS C\n\t\tJOIN algorithmia.call_algorithm AS S \n\t\tON S.$body.document = C.commit.message\n\tWHERE C.owner='seattlerb'\n\tAND C.repo='heckle'\n\tAND S.user='nlp'\n \tAND S.algorithm='SentimentAnalysis'\n    LIMIT 100)\nWHERE (sentiment > 0.2 OR sentiment < -0.2)\nORDER BY sentiment"
+          }
         }
-      }, {
-        "id": "SentimentAnalysis on GitHub Repo",
-        "description": "Check a GH repo for happy or angry commit messages",
-        "tql": {
-          "tql": "-- A more complicated integration that uses GitHub commits as the bodies for Algorithmia\nSELECT * FROM \n(SELECT C.commit.message, S.result[0].sentiment\n\tFROM github.list_commits AS C\n\t\tJOIN algorithmia.call_algorithm AS S \n\t\tON S.$body.document = C.commit.message\n\tWHERE C.owner='seattlerb'\n\tAND C.repo='heckle'\n\tAND S.user='nlp'\n \tAND S.algorithm='SentimentAnalysis'\n    LIMIT 100)\nWHERE (sentiment > 0.2 OR sentiment < -0.2)\nORDER BY sentiment"
-        }
-      }],
+      ],
       "javascriptAPIVersion": "3",
       "source": "src",
       "userSettingsDisplay": "GENERATED"
